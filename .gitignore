@@ -1,0 +1,20 @@
+# secrets
+secrets.zsh
+*.env
+.env*
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+known_hosts
+
+# editor/app state
+globalStorage/
+History/
+workspaceStorage/
+node_modules/
+
+# noise
+.DS_Store
+*.bak
+*.bak-*
