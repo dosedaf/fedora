@@ -5,6 +5,49 @@ return {
     "nvim-lualine/lualine.nvim",
 
     opts = function(_, opts)
+      local satellite = {
+        bg = "#030813",
+        fg = "#ddddcc",
+        panel = "#202030",
+        dim = "#738c73",
+        keyword = "#cda869",
+        string = "#8f9d6a",
+        number = "#a4c260",
+        bool = "#aa88aa",
+        white = "#f7f7f1",
+        salmon = "#fa8072",
+      }
+
+      local theme = "auto"
+      if vim.g.colors_name == "satellite" then
+        theme = {
+          normal = {
+            a = { fg = satellite.bg, bg = satellite.keyword, gui = "bold" },
+            b = { fg = satellite.fg, bg = satellite.panel },
+            c = { fg = satellite.dim, bg = satellite.bg },
+            z = { fg = satellite.fg, bg = satellite.bg },
+          },
+          insert = { a = { fg = satellite.bg, bg = satellite.string, gui = "bold" } },
+          visual = { a = { fg = satellite.bg, bg = satellite.bool, gui = "bold" } },
+          replace = { a = { fg = satellite.bg, bg = satellite.salmon, gui = "bold" } },
+          command = { a = { fg = satellite.bg, bg = satellite.number, gui = "bold" } },
+          terminal = { a = { fg = satellite.bg, bg = satellite.dim, gui = "bold" } },
+          inactive = {
+            a = { fg = satellite.dim, bg = satellite.bg },
+            b = { fg = satellite.dim, bg = satellite.bg },
+            c = { fg = satellite.dim, bg = satellite.bg },
+            z = { fg = satellite.dim, bg = satellite.bg },
+          },
+        }
+      end
+
+      opts.options = vim.tbl_deep_extend("force", opts.options or {}, {
+        theme = theme,
+        globalstatus = true,
+        component_separators = "",
+        section_separators = "",
+      })
+
       local modes = {
         n = "RW",
         no = "RO",
@@ -27,14 +70,6 @@ return {
         ["!"] = "!",
         t = "T",
       }
-
-      opts.options = vim.tbl_deep_extend("force", opts.options or {}, {
-        -- follows the active colorscheme (oxocarbon ships a lualine theme)
-        theme = "auto",
-        globalstatus = true,
-        component_separators = "",
-        section_separators = "",
-      })
 
       opts.sections = {
         lualine_a = {
