@@ -1,6 +1,6 @@
 # fedora
 
-Fedora 43 workstation setup. Public repo: no secrets, ever (see [SAFETY.md](SAFETY.md)).
+Fedora 44 workstation setup. Public repo: no secrets, ever (see [SAFETY.md](SAFETY.md)).
 
 ## Fresh machine
 
