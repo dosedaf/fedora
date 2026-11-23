@@ -1,0 +1,30 @@
+[
+    // 1. Alt+T: Toggle terminal (open/focus/close)
+    {
+        "key": "alt+t",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
+    },
+    {
+        "key": "alt+t",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "!terminal.active"
+    },
+    // 2. Alt+J: Focus active editor group (go to code)
+    {
+        "key": "alt+j",
+        "command": "workbench.action.focusActiveEditorGroup"
+    },
+    // 3. Alt+E: Open/show Explorer (does nothing if already focused)
+    {
+        "key": "alt+e",
+        "command": "workbench.view.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled && !filesExplorerFocus"
+    },
+    // 4. Alt+X: Open/show Extensions (does nothing if already focused)
+    {
+        "key": "alt+x",
+        "command": "workbench.view.extensions",
+        "when": "viewContainer.workbench.view.extensions.enabled && !focusedView == 'workbench.view.extensions'"
+    },
+]

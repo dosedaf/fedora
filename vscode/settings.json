@@ -1,0 +1,71 @@
+{
+    "editor.minimap.enabled": false,
+    "editor.stickyScroll.enabled": false,
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.fontLigatures": true,
+    "workbench.statusBar.visible": true,
+    "workbench.sideBar.location": "right",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "go.useLanguageServer": true,
+    "go.toolsManagement.autoUpdate": true,
+    // "go.formatTool": "gopls",
+    "go.lintTool": "golangci-lint",
+    "go.lintOnSave": "file",
+    "go.testOnSave": true,
+    "go.vetOnSave": "off",
+    "rest-client.previewOption": "exchange",
+    "rest-client.timeoutInMilliseconds": 10000,
+    "markdown.preview.breaks": true,
+    "markdown.preview.fontSize": 14,
+    "markdown.preview.lineHeight": 1.6,
+    "redhat.telemetry.enabled": false,
+    "[solidity]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "editor.formatOnSave": true,
+    "solidity.telemetry": true,
+    "workbench.activityBar.location": "hidden",
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        },
+        "zsh": {
+            "path": "/usr/bin/zsh"
+        },
+        "fish": {
+            "path": "fish"
+        },
+        "tmux": {
+            "path": "tmux",
+            "icon": "terminal-tmux"
+        },
+        "pwsh": {
+            "path": "pwsh",
+            "icon": "terminal-powershell"
+        }
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "explorer.confirmPasteNative": false,
+    "python.defaultInterpreterPath": "/bin/python",
+    "notebook.output.textLineLimit": 500,
+    "python.analysis.ignore": [
+        "*"
+    ],
+    "workbench.colorTheme": "Black",
+    "dart.flutterSdkPath": "/home/yoda/sdk/flutter",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "python": false
+    },
+    "claudeCode.preferredLocation": "panel",
+    "vscode-neovim.neovimExecutablePaths.linux": "/home/yoda/bin/nvim-clean",
+}
