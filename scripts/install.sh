@@ -7,7 +7,7 @@ command -v stow >/dev/null || { echo "install stow first: sudo dnf install stow"
 
 echo "== stow"
 for pkg in zsh wezterm yazi btop nvim; do
-    [ -d "$pkg" ] && stow -t "$HOME" "$pkg"
+    [ -d "$pkg" ] && stow --no-folding -t "$HOME" "$pkg"
 done
 
 echo "== fonts"
