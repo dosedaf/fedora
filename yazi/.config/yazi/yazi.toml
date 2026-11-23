@@ -1,0 +1,15 @@
+# minimal yazi config
+
+[manager]
+linemode = "size"
+show_hidden = false
+
+[opener]
+open = [
+    { run = 'xdg-open "$@"', orphan = true, desc = "Open" }
+]
+
+[open]
+rules = [
+    { mime = "*", use = "open" }
+]
