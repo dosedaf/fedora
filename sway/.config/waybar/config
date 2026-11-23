@@ -1,0 +1,87 @@
+// waybar — Blackout palette, tuned for the Nitro
+// Stowed from ~/fedora -> ~/.config/waybar/config
+// Deliberately text-only: no Nerd Font glyphs to garble.
+{
+    "layer": "top",
+    "position": "top",
+    "height": 28,
+    "spacing": 10,
+
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "battery", "clock", "tray"],
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}",
+        "format-icons": {
+            "urgent": "<b>!</b>",
+            "focused": "<b>{name}</b>",
+            "default": "{name}"
+        }
+    },
+
+    "sway/mode": {
+        "format": "<i>{}</i>"
+    },
+
+    "sway/window": {
+        "max-length": 60,
+        "format": "{title}"
+    },
+
+    "pulseaudio": {
+        "format": "{volume}%",
+        "format-muted": "muted",
+        "format-source": "{volume}% mic",
+        "format-source-muted": "mic off",
+        "on-click": "pavucontrol",
+        "scroll-step": 2
+    },
+
+    "backlight": {
+        "format": "{percent}%",
+        "on-scroll-up": "brightnessctl set 2%+",
+        "on-scroll-down": "brightnessctl set 2%-"
+    },
+
+    "network": {
+        "format-wifi": "{signalStrength}% wifi",
+        "format-ethernet": "eth",
+        "format-linked": "link",
+        "format-disconnected": "offline",
+        "interval": 5
+    },
+
+    "cpu": {
+        "format": "{usage}% cpu",
+        "interval": 3
+    },
+
+    "memory": {
+        "format": "{percentage}% mem",
+        "interval": 5
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}%",
+        "format-charging": "{capacity}% +",
+        "format-plugged": "{capacity}% ac",
+        "tooltip-format": "{timeTo} left"
+    },
+
+    "clock": {
+        "format": "{:%a %d %b  %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+
+    "tray": {
+        "spacing": 8
+    }
+}

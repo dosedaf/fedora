@@ -6,7 +6,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 command -v stow >/dev/null || { echo "install stow first: sudo dnf install stow" >&2; exit 1; }
 
 echo "== stow"
-for pkg in zsh wezterm yazi btop nvim; do
+for pkg in zsh wezterm yazi btop nvim sway; do
     [ -d "$pkg" ] && stow --no-folding -t "$HOME" "$pkg"
 done
 

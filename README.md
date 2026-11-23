@@ -28,6 +28,7 @@ Then:
 | `wezterm/` | wezterm config |
 | `yazi/` | minimal yazi config |
 | `btop/` | btop config |
+| `sway/` | sway (GNOME alternative session), waybar, mako, GPU env |
 | `gnome/` | dconf dumps, monitors, mimeapps, autostart, wallpaper |
 | `vscode/` | settings, keybinds, snippets, extensions |
 | `fonts/` | JetBrainsMono |

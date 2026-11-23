@@ -1,0 +1,100 @@
+/* waybar — omni.nvim "Blackout" flavour
+   Stowed from ~/fedora -> ~/.config/waybar/style.css */
+
+* {
+    font-family: "JetBrainsMono Nerd Font Mono", "JetBrains Mono", monospace;
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: #000000;
+    border-bottom: 1px solid #282828;
+    color: #c0c0c0;
+}
+
+/* ---- workspaces ---- */
+#workspaces {
+    margin-left: 6px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    color: #606060;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#workspaces button.occupied {
+    color: #c0c0c0;
+}
+
+#workspaces button.focused {
+    color: #ffffff;
+    background: #404040;
+}
+
+#workspaces button.urgent {
+    color: #000000;
+    background: #ffffff;
+}
+
+#workspaces button:hover {
+    background: #282828;
+    color: #ffffff;
+}
+
+#mode {
+    padding: 0 10px;
+    color: #ffffff;
+    background: #282828;
+}
+
+/* ---- center ---- */
+#window {
+    color: #808080;
+}
+
+/* ---- right side ---- */
+#pulseaudio,
+#backlight,
+#network,
+#cpu,
+#memory,
+#battery,
+#clock,
+#tray {
+    padding: 0 9px;
+    color: #c0c0c0;
+}
+
+#clock {
+    color: #ffffff;
+    padding-right: 12px;
+}
+
+#network.disconnected {
+    color: #606060;
+}
+
+#battery.warning {
+    color: #ffffff;
+    background: #282828;
+}
+
+#battery.critical {
+    color: #000000;
+    background: #ffffff;
+}
+
+#pulseaudio.muted {
+    color: #606060;
+}
+
+#tray menu {
+    background: #000000;
+    color: #c0c0c0;
+    border: 1px solid #282828;
+}
