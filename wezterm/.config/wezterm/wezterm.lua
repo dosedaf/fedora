@@ -70,7 +70,7 @@ config.window_frame = {
 }
 
 config.font = wezterm.font_with_fallback({
-  { family = "Iosevka Nerd Font Mono", weight = "Regular" },
+  { family = "JetBrainsMono Nerd Font Mono", weight = "Regular" },
   "Noto Color Emoji",
 })
 config.font_size = 11.0
