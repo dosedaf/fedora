@@ -41,9 +41,10 @@
     },
 
     "backlight": {
+        "device": "acpi_video1",
         "format": "{percent}%",
-        "on-scroll-up": "brightnessctl set 2%+",
-        "on-scroll-down": "brightnessctl set 2%-"
+        "on-scroll-up": "brightnessctl -d acpi_video1 set 5%+",
+        "on-scroll-down": "brightnessctl -d acpi_video1 set 5%-"
     },
 
     "network": {

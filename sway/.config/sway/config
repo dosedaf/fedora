@@ -17,12 +17,14 @@ exec waybar
 exec mako
 exec /usr/libexec/lxqt-policykit-agent
 
-# Locking / idle is deliberately off until both outputs are confirmed working
-# (swaylock has to draw on every output). Uncomment when you're happy:
-#exec swayidle -w \
-#    timeout 300 'swaylock -f -c 000000' \
-#    timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#    before-sleep 'swaylock -f -c 000000'
+# Idle: lock after 5 min, displays off after 10, lock before sleep.
+# Lock manually first to be sure it behaves: $mod+Escape.
+# If the screen ever locks with nothing drawn: Ctrl+Alt+F3, log in, pkill swaylock.
+exec swayidle -w \
+    timeout 300 'swaylock -f -c 000000' \
+    timeout 600 'swaymsg "output * power off"' \
+    resume 'swaymsg "output * power on"' \
+    before-sleep 'swaylock -f -c 000000'
 
 ### Outputs
 # Laptop panel (Intel iGPU) left, AOC monitor (RTX 3050 via HDMI) right.
@@ -169,8 +171,11 @@ bindsym --locked XF86AudioPrev exec playerctl previous
 bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioStop exec playerctl stop
 
-bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+# Panel backlight is the Intel-side ACPI video device (acpi_video1); the
+# NVIDIA-side acpi_video0 is not connected to the panel.
+bindsym --locked XF86MonBrightnessDown exec brightnessctl -d acpi_video1 set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl -d acpi_video1 set 5%+
+bindsym $mod+Escape exec swaylock -f -c 000000
 
 ### Appearance — omni.nvim "Blackout" flavour
 #                     border    background  text      indicator  child_border
