@@ -19,7 +19,7 @@ Files here are stowed from `~/fedora/sway/.config/waybar` into
 
 | Module | Format | Detail |
 |---|---|---|
-| `sway/workspaces` | `{icon}` | `all-outputs: false`, so a bar lists only its own output's workspaces |
+| `sway/workspaces` | `●` | literal format, one dot per workspace; `all-outputs: false` so a bar lists only its own output's; `persistent-workspaces` keeps all ten slots on screen |
 | `sway/mode` | `<i>{}</i>` | shows `resize` only while in that mode |
 | `sway/window` | `{title}` | `max-length` 60, `JetBrainsMono Nerd Font Mono` 12px semibold (600), `#c0c0c0` |
 | `pulseaudio` | `{volume}% {icon}` | icons `U+F026` to `U+F028` by level; muted `U+F6A9` plus `format_source` `U+F130`; `on-click` runs `pavucontrol` |
@@ -69,11 +69,21 @@ sway-monitor focus   # focus output <next>
 sway-monitor move    # move container to output <next>
 ```
 
+### Dots instead of numbers
+
+The label is a single `●` per workspace, so the digit is position, not text.
+Colour carries the state, through the styles waybar exposes on
+`#workspaces button`: `.empty`, `.visible`, `.focused`, `.urgent`. Ten dots
+always show on each bar because `persistent-workspaces` is configured for all
+ten names on both outputs.
+
 ### Traps
 
-1. `format-icons` in `config` maps every `<n>:<output>` name back to its
-   digit. Workspace 11 and up needs its own entry, otherwise waybar prints the
-   raw name `11:HDMI-A-1`.
+1. `persistent-workspaces` lists every workspace by full name with the output
+   it belongs to, and there is one entry per workspace per output. Add a
+   workspace beyond ten and it needs an entry there, otherwise its dot only
+   appears once the workspace exists. The button label is a literal `●`, so no
+   `format-icons` map is involved.
 2. Names must start with the number. `<output>:<n>` sort as `3 2 1` because
    sway orders non-numeric names by insertion; `<n>:<output>` sorts `1 2 3`
    numerically.
@@ -93,8 +103,11 @@ sway-monitor move    # move container to output <next>
 | bottom border | `1px #282828` |
 | default text | `#c0c0c0` |
 | muted, idle, unfocused | `#606060` |
-| focused workspace text, clock | `#ffffff` |
-| focused workspace background | `#404040` |
+| clock | `#ffffff` |
+| workspace dot, empty | `#2e2e2e` |
+| workspace dot, holds windows | `#707070` |
+| workspace dot, visible on its output | `#c0c0c0` |
+| workspace dot, focused | `#ffffff` |
 | urgent workspace | `#000000` on `#ffffff` |
 
 Font stack: `JetBrains Mono`, `Font Awesome 6 Free`, `sans-serif`. Glyphs need

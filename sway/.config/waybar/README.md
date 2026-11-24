@@ -18,7 +18,8 @@ use two monitors.
 
 ![waybar](waybar.png)
 
-- Left: workspace numbers, the one you are on is lit up, the rest are dim.
+- Left: one dot per workspace, ten of them, so the position is the number.
+  White is where you are, mid grey holds windows, near black is empty.
 - Middle: title of the window you are looking at, in a nerd font.
 - Right: volume, network, time. Volume clicks through to `pavucontrol`.
 
