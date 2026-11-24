@@ -106,6 +106,7 @@ button:hover {
 #window {
     font-family: "JetBrainsMono Nerd Font Mono", "JetBrains Mono", monospace;
     font-size: 12px;
+    font-weight: 600;
     color: #c0c0c0;
 }
 

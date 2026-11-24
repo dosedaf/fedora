@@ -21,7 +21,7 @@ Files here are stowed from `~/fedora/sway/.config/waybar` into
 |---|---|---|
 | `sway/workspaces` | `{icon}` | `all-outputs: false`, so a bar lists only its own output's workspaces |
 | `sway/mode` | `<i>{}</i>` | shows `resize` only while in that mode |
-| `sway/window` | `{title}` | `max-length` 60, `JetBrainsMono Nerd Font Mono` 12px, `#c0c0c0` |
+| `sway/window` | `{title}` | `max-length` 60, `JetBrainsMono Nerd Font Mono` 12px semibold (600), `#c0c0c0` |
 | `pulseaudio` | `{volume}% {icon}` | icons `U+F026` to `U+F028` by level; muted `U+F6A9` plus `format_source` `U+F130`; `on-click` runs `pavucontrol` |
 | `network` | see below | `interval` 1s |
 | `clock` | default `{:%H:%M}` | bold white, no date, no calendar tooltip |
