@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Sway (hybrid GPU)
+Comment=sway via ~/.local/bin/sway-hybrid — resolves Intel/NVIDIA DRM devices at launch
+Exec=/home/yoda/.local/bin/sway-hybrid
+Type=Application
+DesktopNames=sway;wlroots;
+Keywords=tiling;compositor;

@@ -27,6 +27,8 @@ read -r -p "restore GNOME settings now? [y/N] " ans
 cat <<'EOF'
 
 Manual steps left:
+  sway     : sudo install -Dm644 ~/fedora/sway/.local/share/wayland-sessions/sway-hybrid.desktop \\
+             /usr/local/share/wayland-sessions/sway-hybrid.desktop
   packages : scripts/pick-packages.sh dnf   (then flatpak/brew/npm/uv)
              scripts/install-selected.sh
   packages : packages/manual.md for non-manager installs

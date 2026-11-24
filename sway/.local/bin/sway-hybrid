@@ -1,0 +1,45 @@
+#!/bin/sh
+# sway-hybrid — start sway on the hybrid Intel + NVIDIA laptop.
+#
+# WLR_DRM_DEVICES is a colon-separated list, so the /dev/dri/by-path names
+# cannot be used in it directly — they contain colons themselves
+# (pci-0000:00:02.0-card), which wlroots splits apart. Resolve the symlinks to
+# /dev/dri/cardN here, at launch time, instead of hard-coding card numbers that
+# move around between boots.
+#
+#   00:02.0 = Intel Iris Xe -> primary; drives the laptop panel (eDP-1)
+#   01:00.0 = RTX 3050      -> secondary; drives HDMI-A-1
+#
+# Missing devices are skipped, so this still works on the Intel iGPU alone.
+set -eu
+
+intel=/dev/dri/by-path/pci-0000:00:02.0-card
+nvidia=/dev/dri/by-path/pci-0000:01:00.0-card
+
+devs=
+add() {
+    [ -e "$1" ] || return 0
+    dev=$(readlink -f "$1") || return 0
+    [ -n "$dev" ] || return 0
+    devs=${devs:+$devs:}$dev
+}
+add "$intel"
+add "$nvidia"
+
+if [ -z "$devs" ]; then
+    echo "sway-hybrid: no DRM devices under /dev/dri/by-path — is the GPU driver loaded?" >&2
+    exit 1
+fi
+
+WLR_DRM_DEVICES=$devs
+# nvidia has no working hardware-cursor path under wlroots
+WLR_NO_HARDWARE_CURSORS=1
+export WLR_DRM_DEVICES WLR_NO_HARDWARE_CURSORS
+
+# note: SWAY_UNSUPPORTED_GPU is not a sway variable; only the flag works
+unset SWAY_UNSUPPORTED_GPU 2>/dev/null || true
+
+echo "sway-hybrid: WLR_DRM_DEVICES=$WLR_DRM_DEVICES" >&2
+
+# proprietary NVIDIA: sway refuses to start without --unsupported-gpu
+exec sway --unsupported-gpu "$@"
