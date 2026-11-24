@@ -76,7 +76,7 @@ config.font = wezterm.font_with_fallback({
 config.font_size = 14.0
 config.line_height = 1.0
 
-config.window_padding = { left = 8, right = 8, top = 8, bottom = 8 }
+config.window_padding = { left = 16, right = 16, top = 16, bottom = 16 }
 config.enable_scroll_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
@@ -85,7 +85,8 @@ config.audible_bell = "Disabled"
 config.inactive_pane_hsb = { saturation = 0.9, brightness = 0.7 }
 
 -- ── quality of life ───────────────────────────────────────────────────────
-config.window_background_opacity = 0.97
+config.window_background_opacity = 0.5
+config.wayland_window_background_blur = true
 config.window_close_confirmation = "NeverPrompt"
 config.adjust_window_size_when_changing_font_size = false
 config.hide_mouse_cursor_when_typing = true

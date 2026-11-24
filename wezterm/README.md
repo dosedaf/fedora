@@ -1,7 +1,7 @@
 # wezterm
 
 Single-file WezTerm setup: [Satellite](https://github.com/dasch/satellite) palette on a
-pure-black background, JetBrainsMono Nerd Font at 14pt, and a small block of Lua that
+black background, JetBrainsMono Nerd Font at 14pt, and a small block of Lua that
 remembers your window size between launches.
 
 ```
@@ -20,7 +20,7 @@ remembers your window size between launches.
 | green | `#8f9d6a` | |
 | magenta | `#aa88aa` | |
 | comment | `#738c73` | inactive tabs |
-| white | `#f7f7f1` | bright white |
+| white | `#f7f7f1` | brightest text |
 
 ## Font
 
