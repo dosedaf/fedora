@@ -85,7 +85,7 @@ config.audible_bell = "Disabled"
 config.inactive_pane_hsb = { saturation = 0.9, brightness = 0.7 }
 
 -- ── quality of life ───────────────────────────────────────────────────────
-config.window_background_opacity = 0.5
+config.window_background_opacity = 0.1
 config.wayland_window_background_blur = true
 config.window_close_confirmation = "NeverPrompt"
 config.adjust_window_size_when_changing_font_size = false

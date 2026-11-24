@@ -33,7 +33,7 @@ exec swayidle -w \
 # available with `swaymsg -t get_outputs`.
 output eDP-1 mode 1920x1080 position 0 0 scale 1
 output HDMI-A-1 mode 1920x1080 position 1920 0 scale 1
-output * bg /home/yoda/fedora/sway/wallpaper/cyberpunk-edgerunners.jpg fill
+output * bg /home/yoda/fedora/sway/wallpaper/lucy-starfield.jpg fill
 
 ### Input
 input type:keyboard {
@@ -63,13 +63,13 @@ gaps outer 0
 focus_follows_mouse no
 
 ### Effects (swayfx only — plain sway logs these as unknown commands)
-# Blur behind translucent windows: wezterm runs at 0.5 opacity, so the
+# Blur behind translucent windows: wezterm runs at 0.1 opacity, so the
 # wallpaper shows through it frosted instead of sharp.
 corner_radius 12
 blur enable
 blur_xray disable
-blur_passes 2
-blur_radius 8
+blur_passes 3
+blur_radius 10
 
 ### Window rules
 for_window [class="pavucontrol"] floating enable, resize set 800 600
