@@ -39,7 +39,7 @@ JetBrainsMono Nerd Font Mono, 14pt, with Noto Color Emoji as fallback.
 
 ## Window size
 
-Remembers the size you last used, plus whether it was maximized — leave it
+Remembers the size you last used, plus whether it was maximized. Leave it
 maximized, it comes back maximized; leave it normal, it comes back normal.
 
 ## Keys
