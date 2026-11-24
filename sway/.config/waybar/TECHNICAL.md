@@ -19,7 +19,7 @@ Files here are stowed from `~/fedora/sway/.config/waybar` into
 
 | Module | Format | Detail |
 |---|---|---|
-| `sway/workspaces` | `●` | literal format, one dot per workspace; `all-outputs: false` so a bar lists only its own output's; `persistent-workspaces` keeps all ten slots on screen |
+| `sway/workspaces` | `●` | literal format, one dot per existing workspace; `all-outputs: false` so a bar lists only its own output's |
 | `sway/mode` | `<i>{}</i>` | shows `resize` only while in that mode |
 | `sway/window` | `{title}` | `max-length` 60, `JetBrainsMono Nerd Font Mono` 12px semibold (600), `#c0c0c0` |
 | `pulseaudio` | `{volume}% {icon}` | icons `U+F026` to `U+F028` by level; muted `U+F6A9` plus `format_source` `U+F130`; `on-click` runs `pavucontrol` |
@@ -73,25 +73,24 @@ sway-monitor move    # move container to output <next>
 
 The label is a single `●` per workspace, so the digit is position, not text.
 Colour carries the state, through the styles waybar exposes on
-`#workspaces button`: `.empty`, `.visible`, `.focused`, `.urgent`. Ten dots
-always show on each bar because `persistent-workspaces` is configured for all
-ten names on both outputs.
+`#workspaces button`: `.visible`, `.focused`, `.urgent`.
+
+Only workspaces that exist get a dot. There is no `persistent-workspaces`
+entry on purpose, so an untouched screen shows one dot, not ten. Position
+still tells you which workspace you are looking at because sway keeps the
+dots in numeric order: the second dot from the left is workspace 2 on that
+output.
 
 ### Traps
 
-1. `persistent-workspaces` lists every workspace by full name with the output
-   it belongs to, and there is one entry per workspace per output. Add a
-   workspace beyond ten and it needs an entry there, otherwise its dot only
-   appears once the workspace exists. The button label is a literal `●`, so no
-   `format-icons` map is involved.
-2. Names must start with the number. `<output>:<n>` sort as `3 2 1` because
+1. Names must start with the number. `<output>:<n>` sort as `3 2 1` because
    sway orders non-numeric names by insertion; `<n>:<output>` sorts `1 2 3`
    numerically.
-3. `$mod+Shift+<n>` moves within the current screen. Crossing screens is
+2. `$mod+Shift+<n>` moves within the current screen. Crossing screens is
    `$mod+Shift+m`, not a workspace number.
-4. A sway restart has been seen to drop the prefixes and leave plain `1`, `2`
+3. A sway restart has been seen to drop the prefixes and leave plain `1`, `2`
    workspaces behind. Their windows then sit somewhere no digit reaches, and
-   the bar shows the same number twice. `sway-ws` adopts a bare numeric
+   two workspaces end up claiming the same dot. `sway-ws` adopts a bare numeric
    workspace on the focused output the first time you press that digit,
    renaming it to `<n>:<output>`, so the windows come back into the scheme.
 
@@ -104,7 +103,6 @@ ten names on both outputs.
 | default text | `#c0c0c0` |
 | muted, idle, unfocused | `#606060` |
 | clock | `#ffffff` |
-| workspace dot, empty | `#2e2e2e` |
 | workspace dot, holds windows | `#707070` |
 | workspace dot, visible on its output | `#c0c0c0` |
 | workspace dot, focused | `#ffffff` |
