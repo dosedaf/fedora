@@ -140,6 +140,8 @@ grep -v '^\s*//' ~/.config/waybar/config | jq .
 - Workspaces, window title, volume and network are all `font-weight: 600`,
   the clock is `bold`. Drop the weights in `style.css` if the panel reads too
   heavy at 12 to 13px.
+- Workspaces sit 10px off the left edge: `.modules-left > widget:first-child >
+  #workspaces` sets that margin, since the usual rule zeroes it out.
 - `height` 33, `spacing` 9, `border-radius` 1px and the 3px
   `margin-top`/`margin-bottom` on modules give the floating pill look. Drop
   the margins for a flush bar.
