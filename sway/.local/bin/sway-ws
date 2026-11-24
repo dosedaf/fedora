@@ -17,6 +17,14 @@ n=$2
 out=$(swaymsg -t get_outputs -r | jq -r '.[] | select(.focused) | .name')
 [ -n "$out" ] || exit 1
 
+# A sway restart can drop the "<n>:<output>" prefixes and leave plain numeric
+# workspaces behind. Adopt one on this output rather than stranding its
+# windows on a workspace no key can reach.
+if swaymsg -t get_workspaces -r \
+    | jq -e --arg n "$n" --arg o "$out" 'any(.[]; .name == $n and .output == $o)' >/dev/null; then
+    swaymsg rename workspace "$n" to "${n}:${out}" >/dev/null
+fi
+
 case "$action" in
     go)   swaymsg "workspace ${n}:${out}" ;;
     move) swaymsg "move container to workspace ${n}:${out}" ;;

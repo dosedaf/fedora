@@ -79,6 +79,11 @@ sway-monitor move    # move container to output <next>
    numerically.
 3. `$mod+Shift+<n>` moves within the current screen. Crossing screens is
    `$mod+Shift+m`, not a workspace number.
+4. A sway restart has been seen to drop the prefixes and leave plain `1`, `2`
+   workspaces behind. Their windows then sit somewhere no digit reaches, and
+   the bar shows the same number twice. `sway-ws` adopts a bare numeric
+   workspace on the focused output the first time you press that digit,
+   renaming it to `<n>:<output>`, so the windows come back into the scheme.
 
 ## Palette
 
