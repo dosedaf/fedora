@@ -1,0 +1,24 @@
+#!/bin/sh
+# sway-ws — per-output workspaces
+#
+#   sway-ws go 2      switch to 2:<focused-output>
+#   sway-ws move 2    move the focused container to 2:<focused-output>
+#
+# Workspace names are "<n>:<output>", so 2:eDP-1 and 2:HDMI-A-1 are two
+# different workspaces and $mod+2 always lands on the one belonging to
+# whichever monitor has focus. With a single monitor this is the old behaviour
+# with a prefix, so no hotplug handling is needed.
+set -eu
+
+[ "$#" -eq 2 ] || { echo "usage: $(basename "$0") go|move <n>" >&2; exit 2; }
+action=$1
+n=$2
+
+out=$(swaymsg -t get_outputs -r | jq -r '.[] | select(.focused) | .name')
+[ -n "$out" ] || exit 1
+
+case "$action" in
+    go)   swaymsg "workspace ${n}:${out}" ;;
+    move) swaymsg "move container to workspace ${n}:${out}" ;;
+    *)    echo "sway-ws: unknown action: $action" >&2; exit 2 ;;
+esac

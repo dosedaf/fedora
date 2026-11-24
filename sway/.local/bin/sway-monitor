@@ -1,0 +1,24 @@
+#!/bin/sh
+# sway-monitor — jump between outputs
+#
+#   sway-monitor focus   focus the next active output, wrapping left -> right
+#   sway-monitor move    move the focused container to that output
+#
+# Outputs are ordered by their x position, so with the laptop panel at 0 and
+# the external monitor at 1920 this is a straight toggle. With one output it
+# does nothing.
+set -eu
+
+next=$(swaymsg -t get_outputs -r | jq -r '
+    [.[] | select(.active)] | sort_by(.rect.x) as $o
+    | ($o | map(.name)) as $names
+    | if ($names | length) < 2 then empty
+      else $names[(($names | index(($o | map(select(.focused))[0].name))) + 1) % ($names | length)]
+      end')
+[ -n "$next" ] || exit 0
+
+case "${1:-focus}" in
+    focus) swaymsg "focus output $next" ;;
+    move)  swaymsg "move container to output $next" ;;
+    *)     echo "usage: $(basename "$0") focus|move" >&2; exit 2 ;;
+esac
