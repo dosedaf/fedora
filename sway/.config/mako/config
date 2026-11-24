@@ -1,24 +1,37 @@
 # mako — notifications, Blackout flavour
 # Stowed from ~/fedora -> ~/.config/mako/config
+#
+# Frosted black: the popup is translucent (alpha in background-color) so
+# swayfx blurs whatever is behind it — see the "notifications" layer_effects
+# block in sway/config.
 
 font=JetBrainsMono Nerd Font Mono 10
 
-background-color=#000000
-text-color=#e0e0e0
-border-color=#404040
+background-color=#000000A6
+text-color=#E8E8E8
+border-color=#FFFFFF24
 border-size=1
-border-radius=0
+border-radius=16
+icon-border-radius=10
 
-progress-color=over #404040
+progress-color=over #FFFFFF26
 icons=1
-max-icon-size=32
+max-icon-size=52
 icon-path=/usr/share/icons/hicolor
 
-default-timeout=6000
+default-timeout=6500
 group-by=app-name
 
-width=380
-height=120
-margin=8
-padding=10
+width=360
+height=140
+margin=10
+padding=14
 anchor=top-right
+
+# MixMusic notifications are drawn by music-toast (blurred album-art card);
+# keep mako from drawing a second one underneath.
+[app-name="MixMusic"]
+invisible=1
+
+[app-name="mixmusic"]
+invisible=1

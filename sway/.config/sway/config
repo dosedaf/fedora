@@ -15,7 +15,14 @@ set $shot grimshot
 ### Autostart
 exec waybar
 exec mako
+# Music notifications: blurred album-art card (mako hides its own MixMusic popup)
+exec /usr/bin/python3 ~/.config/sway/music-toast.py --watch
 exec /usr/libexec/lxqt-policykit-agent
+
+# Clipboard history: every copy is stored by cliphist, $mod+Shift+v picks one.
+# Guarded so a missing cliphist does not spam the log before it is installed.
+exec sh -c 'command -v cliphist >/dev/null 2>&1 && exec wl-paste --type text --watch cliphist store'
+exec sh -c 'command -v cliphist >/dev/null 2>&1 && exec wl-paste --type image --watch cliphist store'
 
 # Idle: lock after 5 min, displays off after 10, lock before sleep.
 # Lock manually first to be sure it behaves: $mod+Escape.
@@ -60,7 +67,10 @@ default_floating_border normal
 smart_borders on
 gaps inner 6
 gaps outer 0
+smart_gaps on
 focus_follows_mouse no
+# $mod+left drag moves a floating window, $mod+right drag resizes it
+floating_modifier $mod normal
 
 ### Effects (swayfx only — plain sway logs these as unknown commands)
 # Blur behind translucent windows: wezterm runs at 0.1 opacity, so the
@@ -71,21 +81,45 @@ blur_xray disable
 blur_passes 3
 blur_radius 10
 
+# Layer surfaces have to be named to get effects. wofi (the $mod+d launcher)
+# sets the layer namespace "wofi" and draws a 45% black background, so the
+# blur shows through the panel instead of the wallpaper.
+layer_effects "wofi" {
+    blur enable
+    blur_xray disable
+    blur_ignore_transparent disable
+    corner_radius 16
+}
+
+# mako popups are translucent black (see mako/config), so blur whatever sits
+# behind them for the same frosted look. "notifications" is mako's layer
+# namespace (swaymsg -t get_outputs -> layer_shell_surfaces).
+layer_effects "notifications" {
+    blur enable
+    blur_xray disable
+    blur_ignore_transparent enable
+    corner_radius 16
+}
+
 ### Window rules
 for_window [class="pavucontrol"] floating enable, resize set 800 600
 for_window [class="lxqt-policykit-agent"] floating enable
 for_window [title="(Open File|Save File|Save As)"] floating enable
 for_window [app_id="nm-connection-editor"] floating enable
 
+# Keep the screen awake while anything is fullscreen (video, calls, games).
+# Covers Wayland via app_id and XWayland via class.
+for_window [app_id=".*"] inhibit_idle fullscreen
+for_window [class=".*"] inhibit_idle fullscreen
+
 ### Key bindings — basics
 bindsym $mod+Return exec $term
 bindsym $mod+d exec $menu
+bindsym Alt+Tab exec ~/.local/bin/sway-switcher
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec swaynag -t warning \
-    -m 'Exit sway? This ends your Wayland session.' \
-    -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+e exec ~/.local/bin/sway-power
 
 ### Screenshots (grimshot: grim + slurp + wl-clipboard)
 bindsym $mod+p exec $shot save active
@@ -93,6 +127,9 @@ bindsym $mod+Shift+p exec $shot copy active
 bindsym $mod+Mod1+p exec $shot save output
 bindsym $mod+Ctrl+p exec $shot copy area
 bindsym --locked Print exec $shot save output
+
+### Clipboard history (cliphist): pick an entry, put it back on the clipboard
+bindsym $mod+Shift+v exec sh -c 'cliphist list | wofi --dmenu --prompt clipboard --cache-file /dev/null | cliphist decode | wl-copy'
 
 ### Moving around
 bindsym $mod+$left focus left
