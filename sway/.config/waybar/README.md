@@ -16,9 +16,7 @@ use two monitors.
 
 ## What it looks like
 
-```
-1 2 3 · resize │ window title │ 70% [spk]  [wifi]  10:28
-```
+![waybar](waybar.png)
 
 - Left: workspace numbers, the one you are on is lit up, the rest are dim.
 - Middle: title of the window you are looking at, in a nerd font.
