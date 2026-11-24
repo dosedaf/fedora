@@ -3,6 +3,20 @@
 Bar for sway. Lives in `~/fedora/sway/.config/waybar`, stowed into
 `~/.config/waybar`. Plain waybar JSON and CSS, nothing else.
 
+## Isolated layouting, one layout per monitor
+
+Every output is its own island. Its own workspaces 1 to 10, its own
+numbering, its own apps. Nothing bleeds between screens and no digit is
+wasted on a monitor you are not even looking at.
+
+So `$mod+2` means "the second workspace of this screen" and it means that on
+either screen. The bar follows along: each one only lists the workspaces of
+the output it sits on, and each one numbers them from 1. Two displays, two
+independent layouts, no shared counter. It is, genuinely, the correct way to
+use two monitors.
+
+The rest of this file is how that is wired up.
+
 ## What it shows
 
 ```
@@ -22,13 +36,10 @@ Bar for sway. Lives in `~/fedora/sway/.config/waybar`, stowed into
 Not in the bar: battery, tray, cpu, memory, backlight. The laptop panel
 backlight is driven from sway's keys on `acpi_video1` instead.
 
-## Two monitors, two separate workspace sets
+## How the numbering is wired
 
-Each output keeps its own 1 to 10. They are not shared and not numbered
-globally, so `2` on the external screen and `2` on the laptop panel are
-different workspaces holding different windows.
-
-Workspace names carry the output they belong to:
+Workspace names carry the output they belong to, which is what keeps the two
+1 to 10 sets apart:
 
 ```
 1:HDMI-A-1   2:HDMI-A-1   3:HDMI-A-1        <- external, AOC over HDMI
