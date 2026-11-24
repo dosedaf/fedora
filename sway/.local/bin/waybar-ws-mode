@@ -1,0 +1,26 @@
+#!/bin/sh
+# waybar-ws-mode — choose how empty workspace slots are drawn
+#
+#   waybar-ws-mode dots       every slot gets a dim dot (workspaces already
+#                             exist thanks to persistent-workspaces)
+#   waybar-ws-mode occupied   only workspaces holding windows get a dot
+#
+# Flips ~/.config/waybar/ws-mode.css to point at one of the two mode files and
+# asks waybar to re-read its style. No config edits, no restart.
+set -eu
+
+mode=${1:-}
+case "$mode" in
+    dots|occupied) ;;
+    *) echo "usage: $(basename "$0") dots|occupied" >&2; exit 2 ;;
+esac
+
+cfg=${XDG_CONFIG_HOME:-$HOME/.config}/waybar
+[ -d "$cfg" ] || { echo "$cfg does not exist" >&2; exit 1; }
+
+ln -sfn "$cfg/ws-mode.$mode.css" "$cfg/ws-mode.css"
+
+pid=$(pgrep -x waybar | head -1 || true)
+[ -n "$pid" ] && kill -USR2 "$pid"
+
+echo "waybar workspaces: $mode"

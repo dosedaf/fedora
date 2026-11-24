@@ -1,3 +1,8 @@
+/* Workspace dot mode: ws-mode.css is a symlink to ws-mode.dots.css or
+   ws-mode.occupied.css, flipped by `waybar-ws-mode`. Imports must come
+   before any other rule. */
+@import url("ws-mode.css");
+
 /* waybar - Blackout port of the nix/hyprland config
    Stowed from ~/fedora -> ~/.config/waybar/style.css
 

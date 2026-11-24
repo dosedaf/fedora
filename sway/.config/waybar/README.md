@@ -16,10 +16,19 @@ use two monitors.
 
 ## What it looks like
 
-![waybar](waybar.png)
+Two modes, switched with one command.
 
-- Left: one dot per workspace that exists, in numeric order, so position is
-  the number. White is where you are, mid grey holds windows.
+`waybar-ws-mode dots` keeps a dot for every slot, so you can always see where
+workspace 7 is before you use it:
+
+![waybar, dots mode](waybar-dots.png)
+
+`waybar-ws-mode occupied` draws a dot only where a window actually exists:
+
+![waybar, occupied mode](waybar-occupied.png)
+
+- Left: one dot per workspace, in numeric order, so position is the number.
+  White is where you are, mid grey holds windows.
 - Middle: title of the window you are looking at, in a nerd font.
 - Right: volume, network, time. Volume clicks through to `pavucontrol`.
 

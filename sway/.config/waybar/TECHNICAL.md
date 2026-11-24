@@ -75,11 +75,25 @@ The label is a single `●` per workspace, so the digit is position, not text.
 Colour carries the state, through the styles waybar exposes on
 `#workspaces button`: `.visible`, `.focused`, `.urgent`.
 
-Only workspaces that exist get a dot. There is no `persistent-workspaces`
-entry on purpose, so an untouched screen shows one dot, not ten. Position
-still tells you which workspace you are looking at because sway keeps the
-dots in numeric order: the second dot from the left is workspace 2 on that
-output.
+`persistent-workspaces` in `config` lists all ten names per output, so every
+slot exists as a button even when sway has no such workspace. What happens to
+those empty buttons is decided in CSS, and that is the mode switch:
+
+| File | Empty slots |
+|---|---|
+| `ws-mode.dots.css` | drawn, `#2e2e2e` |
+| `ws-mode.occupied.css` | collapsed: transparent, `font-size: 0`, no padding |
+
+`style.css` starts with `@import url("ws-mode.css")`, and
+`~/.config/waybar/ws-mode.css` is a symlink to whichever mode file is active.
+`waybar-ws-mode dots|occupied` flips the symlink and sends `SIGUSR2`.
+
+Two things worth knowing:
+
+- Switching modes is style only, so the reload is enough.
+- Adding or removing the `persistent-workspaces` block itself needs a full
+  waybar restart, not a reload. A reloaded bar can end up with the slots on
+  one output and not the other.
 
 ### Traps
 

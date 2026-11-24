@@ -1,0 +1,7 @@
+/* Workspace dot modes, switched by `waybar-ws-mode dots|occupied`.
+   ~/.config/waybar/ws-mode.css is a symlink to one of these two files, and
+   style.css imports it. Empty slots are dim dots here. */
+
+#workspaces button.empty {
+    color: #2e2e2e;
+}
