@@ -46,6 +46,7 @@ button:hover {
     padding: 0 6px;
     background-color: transparent;
     color: #606060;
+    font-weight: 600;
 }
 
 #workspaces button:hover {
@@ -121,6 +122,7 @@ button:hover {
 #network {
     background-color: transparent;
     color: #c0c0c0;
+    font-weight: 600;
 }
 
 #network.disconnected {
@@ -131,6 +133,7 @@ button:hover {
 #pulseaudio {
     background-color: transparent;
     color: #c0c0c0;
+    font-weight: 600;
 }
 
 #pulseaudio.muted {
