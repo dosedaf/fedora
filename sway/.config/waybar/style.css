@@ -1,100 +1,214 @@
-/* waybar — omni.nvim "Blackout" flavour
-   Stowed from ~/fedora -> ~/.config/waybar/style.css */
+/* waybar - Blackout port of the nix/hyprland config
+   Stowed from ~/fedora -> ~/.config/waybar/style.css
+
+   Every colour from the nix theme is flattened to black + greys:
+   bar base #000000, text #c0c0c0, muted #606060, focus #ffffff / #404040.
+   Font Awesome 6 Free is installed here and covers every glyph in config. */
 
 * {
-    font-family: "JetBrainsMono Nerd Font Mono", "JetBrains Mono", monospace;
-    font-size: 12px;
-    min-height: 0;
+    font-family: "JetBrains Mono", "Font Awesome 6 Free", sans-serif;
+    font-size: 13px;
 }
 
 window#waybar {
     background-color: #000000;
     border-bottom: 1px solid #282828;
     color: #c0c0c0;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+window#waybar.termite,
+window#waybar.chromium {
+    background-color: #000000;
+    border: none;
+}
+
+/* Use box-shadow instead of border so the text isn't offset */
+button {
+    box-shadow: inset 0 -1px transparent;
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -1px #ffffff;
 }
 
 /* ---- workspaces ---- */
-#workspaces {
-    margin-left: 6px;
-}
-
 #workspaces button {
-    padding: 0 8px;
+    padding: 0 6px;
+    background-color: transparent;
     color: #606060;
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
 }
 
-#workspaces button.occupied {
-    color: #c0c0c0;
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.06);
 }
 
+#workspaces button.active,
 #workspaces button.focused {
     color: #ffffff;
-    background: #404040;
+    background-color: #404040;
 }
 
 #workspaces button.urgent {
     color: #000000;
-    background: #ffffff;
+    background-color: #ffffff;
 }
 
-#workspaces button:hover {
-    background: #282828;
-    color: #ffffff;
-}
-
-#mode {
+/* ---- shared module chrome (nix: padding 0 10px, 3px insets, 1px radius) ---- */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd {
     padding: 0 10px;
-    color: #ffffff;
-    background: #282828;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    color: #c0c0c0;
+    border-radius: 1px;
 }
 
-/* ---- center ---- */
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+/* ---- center activity ---- */
 #window {
+    font-family: "JetBrainsMono Nerd Font Mono", "JetBrains Mono", monospace;
+    font-size: 12px;
     color: #808080;
 }
 
 /* ---- right side ---- */
-#pulseaudio,
-#backlight,
-#network,
-#cpu,
-#memory,
-#battery,
-#clock,
-#tray {
-    padding: 0 9px;
-    color: #c0c0c0;
+#clock {
+    background-color: transparent;
+    color: #ffffff;
+    font-weight: bold;
+    margin-right: 7px;
 }
 
-#clock {
-    color: #ffffff;
-    padding-right: 12px;
+#network {
+    background-color: transparent;
+    color: #c0c0c0;
 }
 
 #network.disconnected {
+    background-color: transparent;
     color: #606060;
 }
 
-#battery.warning {
-    color: #ffffff;
-    background: #282828;
-}
-
-#battery.critical {
-    color: #000000;
-    background: #ffffff;
+#pulseaudio {
+    background-color: transparent;
+    color: #c0c0c0;
 }
 
 #pulseaudio.muted {
+    background-color: transparent;
     color: #606060;
 }
 
-#tray menu {
-    background: #000000;
+#mode {
+    background-color: #282828;
+    color: #ffffff;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+/* ---- not in modules-* right now, kept monochrome for later ---- */
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery,
+#battery.charging,
+#battery.plugged {
+    background-color: transparent;
     color: #c0c0c0;
-    border: 1px solid #282828;
+}
+
+#battery.critical:not(.charging) {
+    background-color: transparent;
+    color: #c0c0c0;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#wireplumber,
+#custom-media,
+#idle_inhibitor,
+#scratchpad,
+#mpd {
+    background-color: transparent;
+    color: #c0c0c0;
+}
+
+#temperature.critical {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+#idle_inhibitor.activated {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+#scratchpad.empty {
+    background-color: transparent;
+}
+
+#tray {
+    background-color: transparent;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #ffffff;
+    color: #000000;
 }

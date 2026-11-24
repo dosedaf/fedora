@@ -1,25 +1,20 @@
-// waybar — Blackout palette, tuned for the Nitro
+// waybar - Blackout port of the nix/hyprland config
 // Stowed from ~/fedora -> ~/.config/waybar/config
-// Deliberately text-only: no Nerd Font glyphs to garble.
+// hyprland/workspaces -> sway/workspaces, hyprland/window -> sway/window
+// Palette is black + greys: see style.css
 {
     "layer": "top",
     "position": "top",
-    "height": 28,
-    "spacing": 10,
+    "height": 33,
+    "spacing": 9,
 
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "battery", "clock", "tray"],
+    "modules-right": ["pulseaudio", "network", "clock"],
 
     "sway/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "format": "{name}",
-        "format-icons": {
-            "urgent": "<b>!</b>",
-            "focused": "<b>{name}</b>",
-            "default": "{name}"
-        }
+        "all-outputs": false,
+        "format": "{name}"
     },
 
     "sway/mode": {
@@ -32,57 +27,30 @@
     },
 
     "pulseaudio": {
-        "format": "{volume}%",
-        "format-muted": "muted",
-        "format-source": "{volume}% mic",
-        "format-source-muted": "mic off",
-        "on-click": "pavucontrol",
-        "scroll-step": 2
-    },
-
-    "backlight": {
-        "device": "acpi_video1",
-        "format": "{percent}%",
-        "on-scroll-up": "brightnessctl -d acpi_video1 set 5%+",
-        "on-scroll-down": "brightnessctl -d acpi_video1 set 5%-"
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}\uf294",
+        "format-bluetooth-muted": "\uf6a9 {icon}\uf294",
+        "format-icons": {
+            "car": "\uf1b9",
+            "default": ["\uf026", "\uf027", "\uf028"],
+            "handsfree": "\uf590",
+            "headphones": "\uf025",
+            "headset": "\uf590",
+            "phone": "\uf095",
+            "portable": "\uf095"
+        },
+        "format-muted": "\uf6a9 {format_source}",
+        "format-source": "\uf130",
+        "format-source-muted": "\uf131",
+        "on-click": "pavucontrol"
     },
 
     "network": {
-        "format-wifi": "{signalStrength}% wifi",
-        "format-ethernet": "eth",
-        "format-linked": "link",
-        "format-disconnected": "offline",
-        "interval": 5
-    },
-
-    "cpu": {
-        "format": "{usage}% cpu",
-        "interval": 3
-    },
-
-    "memory": {
-        "format": "{percentage}% mem",
-        "interval": 5
-    },
-
-    "battery": {
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}%",
-        "format-charging": "{capacity}% +",
-        "format-plugged": "{capacity}% ac",
-        "tooltip-format": "{timeTo} left"
-    },
-
-    "clock": {
-        "format": "{:%a %d %b  %H:%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-
-    "tray": {
-        "spacing": 8
+        "interval": 1,
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "format-disconnected": "Disconnected \u26a0",
+        "format-ethernet": "gacorrr",
+        "format-linked": "{ifname} (No IP) \uf796",
+        "format-wifi": "\uf1eb"
     }
 }
