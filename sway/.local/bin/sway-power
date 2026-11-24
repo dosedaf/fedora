@@ -1,0 +1,19 @@
+#!/bin/sh
+# sway-power — lock / logout / suspend / reboot / shutdown via wofi
+#
+# Bound to $mod+Shift+e. Reboot and poweroff go through the running
+# lxqt-policykit-agent, so they work without a terminal.
+set -eu
+
+choice=$(printf 'Lock\nLogout\nSuspend\nReboot\nShutdown\n' \
+    | wofi --dmenu --prompt power --cache-file /dev/null)
+
+[ -n "${choice:-}" ] || exit 0
+
+case "$choice" in
+    Lock)     exec swaylock -f -c 000000 ;;
+    Logout)   exec swaymsg exit ;;
+    Suspend)  exec systemctl suspend ;;
+    Reboot)   exec systemctl reboot ;;
+    Shutdown) exec systemctl poweroff ;;
+esac

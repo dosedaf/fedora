@@ -1,0 +1,15 @@
+# wofi — mod+d app launcher, Blackout flavour
+# Stowed from ~/fedora -> ~/.config/wofi/config
+# Styling lives in style.css (translucent black over swayfx blur).
+
+show=drun
+prompt=apps
+width=32%
+height=42%
+location=center
+gtk_dark=true
+hide_scroll=true
+insensitive=true
+matching=fuzzy
+allow_images=false
+term=wezterm

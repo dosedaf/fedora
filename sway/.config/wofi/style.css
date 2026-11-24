@@ -1,0 +1,67 @@
+/* wofi — mod+d app launcher, Blackout flavour
+   Stowed from ~/fedora -> ~/.config/wofi/style.css
+
+   Black base at 45% opacity so swayfx can blur what is behind it
+   (sway config: layer_effects "wofi" { blur enable }).
+   Compact: tight padding, no icons, plain JetBrains Mono. */
+
+window {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: #c0c0c0;
+
+    background-color: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(64, 64, 64, 0.55);
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+#outer-box {
+    padding: 12px;
+    background-color: transparent;
+}
+
+#input {
+    margin: 0 0 8px 0;
+    padding: 8px 12px;
+    border: 1px solid rgba(64, 64, 64, 0.50);
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    caret-color: #ffffff;
+}
+
+#input:focus {
+    border-color: rgba(255, 255, 255, 0.28);
+}
+
+#inner-box,
+#scroll {
+    background-color: transparent;
+}
+
+#scroll {
+    margin: 0;
+}
+
+#entry {
+    padding: 6px 10px;
+    margin: 1px 0;
+    border: none;
+    border-radius: 6px;
+    background-color: transparent;
+    color: #a8a8a8;
+}
+
+#entry:selected,
+#entry:selected #text,
+#text:selected {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+#text {
+    margin: 0;
+    color: #a8a8a8;
+}

@@ -1,0 +1,20 @@
+#!/bin/sh
+# sway-switcher — pick a window from sway's tree, then focus it.
+#
+# Bound to Alt+Tab. This is a popup, not hold-Alt cycling: type to filter,
+# Enter (or click) to jump. Each line is "<con_id>\t<app> — <title>"; cut -f1
+# gets the id back out for `swaymsg [con_id=N] focus`.
+set -eu
+
+sel=$(swaymsg -t get_tree | jq -r '
+    [recurse(.nodes[]?, .floating_nodes[]?)
+     | select(.type == "con" and .pid != null and .name != null and .name != "")
+     | { id, label: "\(.app_id // .window_properties.class // "?") — \(.name)" }]
+    | .[]
+    | "\(.id)\t\(.label)"' \
+  | wofi --dmenu --prompt windows --cache-file /dev/null --width 50%)
+
+[ -n "${sel:-}" ] || exit 0
+
+id=$(printf '%s\n' "$sel" | cut -f1)
+swaymsg "[con_id=$id] focus"
