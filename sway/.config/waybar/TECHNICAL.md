@@ -82,7 +82,7 @@ those empty buttons is decided in CSS, and that is the mode switch:
 | File | Empty slots |
 |---|---|
 | `ws-mode.dots.css` | drawn, `#2e2e2e` |
-| `ws-mode.occupied.css` | collapsed: transparent, `font-size: 0`, no padding |
+| `ws-mode.occupied.css` | drawn as transparent, so the slot keeps its width and the remaining dots stay in position |
 
 `style.css` starts with `@import url("ws-mode.css")`, and
 `~/.config/waybar/ws-mode.css` is a symlink to whichever mode file is active.
