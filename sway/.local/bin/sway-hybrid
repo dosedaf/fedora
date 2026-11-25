@@ -7,8 +7,8 @@
 # /dev/dri/cardN here, at launch time, instead of hard-coding card numbers that
 # move around between boots.
 #
-#   01:00.0 = RTX 3050      -> primary; drives HDMI-A-1
-#   00:02.0 = Intel Iris Xe -> secondary; drives the laptop panel (eDP-1)
+#   00:02.0 = Intel Iris Xe -> primary; drives the laptop panel (eDP-1)
+#   01:00.0 = RTX 3050      -> secondary; drives HDMI-A-1
 #
 # Missing devices are skipped, so this still works on the Intel iGPU alone.
 set -eu
@@ -23,8 +23,8 @@ add() {
     [ -n "$dev" ] || return 0
     devs=${devs:+$devs:}$dev
 }
-add "$nvidia"
 add "$intel"
+add "$nvidia"
 
 if [ -z "$devs" ]; then
     echo "sway-hybrid: no DRM devices under /dev/dri/by-path — is the GPU driver loaded?" >&2
