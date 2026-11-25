@@ -107,7 +107,7 @@ button:hover {
 
 /* If workspaces is the leftmost module, keep it off the screen edge */
 .modules-left > widget:first-child > #workspaces {
-    margin-left: 10px;
+    margin-left: 8px;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
