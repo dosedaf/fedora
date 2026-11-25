@@ -15,11 +15,6 @@ mkdir -p "$HOME/.local/share/fonts"
 cp -a fonts/*.ttf "$HOME/.local/share/fonts/"
 command -v fc-cache >/dev/null && fc-cache -f >/dev/null
 
-echo "== vscode extensions"
-if command -v code >/dev/null && [ -s vscode/extensions.txt ]; then
-    xargs -r -n1 code --install-extension < vscode/extensions.txt
-fi
-
 echo "== gnome"
 read -r -p "restore GNOME settings now? [y/N] " ans
 [[ "${ans:-n}" == "y" ]] && scripts/restore-gnome.sh

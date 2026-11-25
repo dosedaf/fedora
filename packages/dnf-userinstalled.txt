@@ -62,7 +62,6 @@ clang20-resource-filesystem
 claude-desktop-unofficial
 cmake-data
 cmake-srpm-macros
-code
 colord
 colord-gtk
 compiler-rt20
