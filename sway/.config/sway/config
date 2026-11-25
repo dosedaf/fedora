@@ -40,7 +40,7 @@ exec swayidle -w \
 # available with `swaymsg -t get_outputs`.
 output eDP-1 mode 1920x1080 position 0 0 scale 1
 output HDMI-A-1 mode 1920x1080 position 1920 0 scale 1
-output * bg /home/yoda/fedora/sway/wallpaper/lucy-starfield.jpg fill
+output * bg /home/yoda/fedora/sway/wallpaper/edgerunners-moon.jpg fill
 
 ### Input
 input type:keyboard {
@@ -66,8 +66,8 @@ default_border pixel 2
 default_floating_border normal
 smart_borders on
 gaps inner 6
-gaps outer 0
-smart_gaps on
+gaps outer 2
+smart_gaps off
 focus_follows_mouse no
 # $mod+left drag moves a floating window, $mod+right drag resizes it
 floating_modifier $mod normal
@@ -107,6 +107,9 @@ for_window [class="lxqt-policykit-agent"] floating enable
 for_window [title="(Open File|Save File|Save As)"] floating enable
 for_window [app_id="nm-connection-editor"] floating enable
 
+# Obsidian: frosted like wezterm — translucent window, swayfx blurs behind it.
+for_window [app_id="md.obsidian.Obsidian"] opacity 0.80
+
 # Keep the screen awake while anything is fullscreen (video, calls, games).
 # Covers Wayland via app_id and XWayland via class.
 for_window [app_id=".*"] inhibit_idle fullscreen
@@ -121,12 +124,13 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec ~/.local/bin/sway-power
 
-### Screenshots (grimshot: grim + slurp + wl-clipboard)
-bindsym $mod+p exec $shot save active
-bindsym $mod+Shift+p exec $shot copy active
-bindsym $mod+Mod1+p exec $shot save output
-bindsym $mod+Ctrl+p exec $shot copy area
-bindsym --locked Print exec $shot save output
+### Screenshots (botscreenshot: grim + slurp + wl-clipboard, whole desktop incl. waybar/wofi)
+bindsym $mod+o exec ~/.local/bin/botscreenshot --output current --copy
+bindsym $mod+Shift+o exec ~/.local/bin/botscreenshot --copy
+bindsym $mod+p exec ~/.local/bin/botscreenshot --window
+bindsym $mod+Shift+p exec ~/.local/bin/botscreenshot --window --copy
+bindsym $mod+Ctrl+p exec ~/.local/bin/botscreenshot --region --copy
+bindsym --locked Print exec ~/.local/bin/botscreenshot
 
 ### Clipboard history (cliphist): pick an entry, put it back on the clipboard
 bindsym $mod+Shift+v exec sh -c 'cliphist list | wofi --dmenu --prompt clipboard --cache-file /dev/null | cliphist decode | wl-copy'
