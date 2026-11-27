@@ -135,6 +135,12 @@ bindsym --locked Print exec ~/.local/bin/botscreenshot
 ### Clipboard history (cliphist): pick an entry, put it back on the clipboard
 bindsym $mod+Shift+v exec sh -c 'cliphist list | wofi --dmenu --prompt clipboard --cache-file /dev/null | cliphist decode | wl-copy'
 
+### Dictation (hex): press to start, press again to stop and paste
+# Sway only delivers key presses, so this uses Hex's toggle rather than the
+# press-and-hold shortcut. Hex must already be running; the command is a no-op
+# otherwise (exit 3) instead of launching the app.
+bindsym $mod+Shift+d exec ~/.local/bin/hex dictation toggle
+
 ### Moving around
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
