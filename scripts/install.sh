@@ -10,6 +10,13 @@ for pkg in zsh wezterm yazi btop nvim sway; do
     [ -d "$pkg" ] && stow --no-folding -t "$HOME" "$pkg"
 done
 
+echo "== hex"
+if command -v hex >/dev/null; then
+    scripts/hex-settings-restore.sh || echo "hex settings were not applied; run scripts/hex-settings-restore.sh by hand" >&2
+else
+    echo "hex is not installed yet; install it, then run scripts/hex-settings-restore.sh"
+fi
+
 echo "== fonts"
 mkdir -p "$HOME/.local/share/fonts"
 cp -a fonts/*.ttf "$HOME/.local/share/fonts/"

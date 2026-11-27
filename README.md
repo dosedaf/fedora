@@ -28,7 +28,8 @@ Then:
 4. secrets: decrypt the backup into `$HOME`
 5. shell plugins: oh-my-zsh + `zsh-autosuggestions` + `zsh-syntax-highlighting`
 6. nvim: `:Lazy sync`, then `:Mason`
-7. `sudo dnf install restic` and restore data (separate backup)
+7. hex: install Hex, then `scripts/hex-settings-restore.sh` (save changes back with `scripts/hex-settings-save.sh`)
+8. `sudo dnf install restic` and restore data (separate backup)
 
 ## Configs
 
@@ -42,6 +43,7 @@ Every directory is a [stow](https://www.gnu.org/software/stow/) package rooted h
 | [yazi/](yazi/) | minimal yazi config |
 | [btop/](btop/) | btop config |
 | [sway/](sway/) | sway session, waybar, mako, wofi, `environment.d`, helper scripts |
+| [hex/](hex/) | Hex dictation settings snapshot (applied by `scripts/hex-settings-restore.sh`, not stowed) |
 | [gnome/](gnome/) | dconf dumps, monitors, mimeapps, autostart, wallpaper |
 | [fonts/](fonts/) | JetBrainsMono Nerd Font |
 | [packages/](packages/) | snapshots + picker |
